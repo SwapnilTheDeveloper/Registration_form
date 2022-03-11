@@ -1,0 +1,79 @@
+# install tkinter module
+# pip install tkinter
+
+#import all function & classes of tkinter
+from tkinter import *
+from tkinter import messagebox
+
+#create a GUI window
+screen = Tk()
+
+#given a name for GUI window
+screen.title("Registration Form")
+
+#set a size of GUI window
+screen.geometry("500x500")
+
+#unable resizable button of GUI window
+screen.resizable(False,False)
+
+#create a function for button respond
+def reg():
+  name=txtname.get()
+  age=txtage.get()
+  cno=txtcno.get()
+  email=txtemail.get()
+
+  if name=="":
+    messagebox.showerror("Error","Please enter your name")
+  elif age=="":
+    messagebox.showerror("Error","Please enter your age")
+  elif cno=="":
+    messagebox.showerror("Error","Please enter your contact no")
+  elif email=="":
+    messagebox.showerror("Error","Please enter your email")
+  else:
+    Label(screen,text="Registration successfully !",font="20",fg="green")
+  
+  with open(name+".txt","w") as f:
+    f.write("Name : "+name+"\n")
+    f.write("Age : "+age+"\n")
+    f.write("Contact No : "+cno+"\n")
+    f.write("Email : "+email+"\n")
+
+def clr():
+  lname.delete(0,END)
+  lage.delete(0,END)
+  lcno.delete(0,END)
+  lemail.delete(0,END)
+  
+
+#set heading inside GUI window
+Label(screen,text="Registration Form",font="arial 14 bold",bg="red",fg="").pack(fill="both")
+
+#create lables of registration form
+Label(screen,text="Name",font="20").place(x=30,y=70)
+Label(screen,text="Age",font="20").place(x=30,y=110)
+Label(screen,text="Contact No",font="20").place(x=30,y=150)
+Label(screen,text="Email",font="20").place(x=30,y=190)
+
+#create textbox to input data of registration form
+txtname=StringVar()
+txtage=StringVar()
+txtcno=StringVar()
+txtemail=StringVar()
+
+lname=Entry(screen,font="10",bd=4,textvariable=txtname)
+lname.place(x=140,y=70)
+lage=Entry(screen,font="10",bd=4,textvariable=txtage)
+lage.place(x=140,y=110)
+lcno=Entry(screen,font="10",bd=4,textvariable=txtcno)
+lcno.place(x=140,y=150)
+lemail=Entry(screen,font="10",bd=4,textvariable=txtemail)
+lemail.place(x=140,y=190)
+
+#create submit button
+Button(screen,text="Register",font="20",command=reg).place(x=30,y=250)
+Button(screen,text="Clear",font="20",command=clr).place(x=140,y=250)
+
+mainloop()
